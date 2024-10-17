@@ -1,10 +1,11 @@
-void move(Servo &servoObject, unsigned int angle) {
+// Move Servo to Position
+void move(Servo &servoObject, unsigned short angle) {
   if (angle > 180) {
     Serial.println("Angle out of degree range");
     return 1;
   }
 
-  unsigned long ddelay = (DELAY_MIL * abs(max(angle, servoObject.read()) - min(angle, servoObject.read())));
+  unsigned short ddelay = (DELAY_MIL * abs(max(angle, servoObject.read()) - min(angle, servoObject.read())));
   servoObject.write(angle);
 
   Serial.print("Moving Servo to: ");
@@ -13,16 +14,16 @@ void move(Servo &servoObject, unsigned int angle) {
   delay(ddelay);
 }
 
+// Move Claw
 void claw(bool grab) {
   if (grab) {
-    move(claw_pin, 180);
+    move(claw_pin, 90);
   } else {
     move(claw_pin, 0);
   }
 }
 
-void loop() {}
-
+// Test All Methods
 void test() {
   Serial.println("Testing ...");
   delay(2000);
@@ -34,8 +35,12 @@ void test() {
   claw(false);
 }
 
-void addServo(Servo &servoObject, uint8_t pin) {
+// Add Servo
+void addServo(Servo &servoObject, byte pin) {
   servoObject.attach(pin);
   servoObject.write(0);
   delay(450);
 }
+
+// Empty Predefined Loop
+void loop() {}
