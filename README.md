@@ -1,1 +1,1 @@
-<h1>VULCAN</h1>
+<h1 align="center">VULCAN</h1>
